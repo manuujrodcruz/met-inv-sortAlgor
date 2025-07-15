@@ -1,0 +1,27 @@
+=== Sorting Algorithms Benchmark - C++ Implementation ===
+Authors: Carolina Bencosme-10148929 y Manuel Rodríguez-10150681
+Starting benchmark execution...
+
+Total combinations to execute: 1500
+Progress will be reported every 25 combinations
+Note: Large arrays may take several hours per algorithm
+BubbleSort timeouts: 5min(50K), 10min(100K), 30min(500K), 1hour(1M)
+Other algorithms timeout: 600 seconds
+NO ALGORITHMS WILL BE SKIPPED - All will run or timeout
+
+Testing algorithm: BubbleSort
+  Array size: 1000
+    Progress: 25/1500 combinations completed (1.67%)
+    Progress: 50/1500 combinations completed (3.33%)
+  Array size: 10000
+    Progress: 75/1500 combinations completed (5.00%)
+    Progress: 100/1500 combinations completed (6.67%)
+  Array size: 50000
+    Progress: 125/1500 combinations com    Progress: 175/1500 combinations completed (11.67%)
+    Progress: 200/1500 combinations completed (13.33%)
+  Array size: 500000
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
