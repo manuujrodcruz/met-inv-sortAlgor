@@ -21,7 +21,58 @@ Testing algorithm: BubbleSort
     Progress: 200/1500 combinations completed (13.33%)
   Array size: 500000
 Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000    Progress: 225/1500 combinations completed (15.00%)
+    Progress: 250/1500 combinations completed (16.67%)
+  Array size: 1000000
+Timeout: BubbleSort with size 1000000 after 3600 seconds
+Timeout: BubbleSort with size 1000000 after 3600 seconds
+: BubbleSort with size 500000 after 600 seconds
 Timeout: BubbleSort with size 500000 after 600 seconds
 Timeout: BubbleSort with size 500000 after 600 seconds
 Timeout: BubbleSort with size 500000 after 600 seconds
 Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+    Progress: 225/1500 combinations completed (15.00%)
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+Timeout: BubbleSort with size 500000 after 600 seconds
+    Progress: 250/1500 combinations completed (16.67%)
+  Array size: 1000000
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds
+Timeout: BubbleSort with size 1000000 after 600 seconds

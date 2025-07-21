@@ -28,9 +28,9 @@ def generate_datasets():
     # Fixed seed for reproducibility as mentioned in the document
     random.seed(42)
     
-    # 32-bit integer range
-    min_val = -(2**31)
-    max_val = (2**31) - 1
+    # 32-bit integer range (modificado para limitar el rango a 10,000,000)
+    min_val = 0
+    max_val = 10_000_000 - 1
 
     for size in sizes:
         for dist_name, dist_func in distributions.items():

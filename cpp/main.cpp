@@ -1,5 +1,5 @@
-'''
 #include <iostream>
+#include <functional>
 #include <vector>
 #include <string>
 #include <chrono>
@@ -12,6 +12,7 @@
 #include <set>
 #include <stack>
 #include <stdexcept>
+#include <sstream>
 #include <dirent.h>
 
 // --- Sorting Algorithms ---
@@ -102,10 +103,8 @@ std::vector<int> countingSort(std::vector<int>& arr) {
     auto minmax = std::minmax_element(arr.begin(), arr.end());
     long long min_val = *minmax.first;
     long long max_val = *minmax.second;
-    if (max_val - min_val > 20000000) {
-        std::cerr << "Warning: Skipping Counting Sort for dataset with range " << max_val - min_val << std::endl;
-        return {}; // Return empty to indicate skip
-    }
+    
+    // Proceed with counting sort regardless of range
     std::vector<int> count(max_val - min_val + 1, 0);
     for (int x : arr) count[x - min_val]++;
     for (size_t i = 1; i < count.size(); i++) count[i] += count[i - 1];
@@ -176,8 +175,7 @@ void runSortingAlgorithm(const std::string& algoName, const std::string& dataset
     auto data = readCsv(datasetPath);
     if (data.empty()) return;
 
-    std::cout << "
-Running " << algoName << " on " << datasetPath.substr(datasetPath.find_last_of('/') + 1) << "..." << std::endl;
+    std::cout << "Running " << algoName << " on " << datasetPath.substr(datasetPath.find_last_of('/') + 1) << "..." << std::flush;
     
     auto data_copy = data;
     auto startTime = std::chrono::high_resolution_clock::now();
@@ -186,10 +184,6 @@ Running " << algoName << " on " << datasetPath.substr(datasetPath.find_last_of('
         algorithms[algoName](data_copy);
     } else if (algorithms_returning_vec.count(algoName)) {
         data_copy = algorithms_returning_vec[algoName](data_copy);
-        if (data_copy.empty()) {
-             std::cout << "Result: SKIPPED (dataset range too large for this algorithm)" << std::endl;
-             return;
-        }
     } else {
         std::cerr << "Error: Algorithm '" << algoName << "' not found." << std::endl;
         return;
@@ -198,91 +192,41 @@ Running " << algoName << " on " << datasetPath.substr(datasetPath.find_last_of('
     auto endTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
 
-    std::cout << "Result: Sorted " << data_copy.size() << " elements in " << std::fixed << std::setprecision(6) << duration << " seconds." << std::endl;
+    std::cout << " Sorted " << data_copy.size() << " elements in " << std::fixed << std::setprecision(6) << duration << " seconds." << std::endl;
 }
 
 
 int main() {
     std::string datasetsDir = "../datasets";
 
-    while (true) {
-        std::cout << "
---- Sorting Algorithm Benchmark (C++) ---" << std::endl;
+    std::cout << "\n--- Sorting Algorithm Benchmark (C++) ---" << std::endl;
+    std::cout << "Running ALL algorithms on ALL datasets...\n" << std::endl;
 
-        // --- Dataset Selection ---
-        std::cout << "
-Available Datasets:" << std::endl;
-        auto datasets = getAvailableDatasets(datasetsDir);
-        if (datasets.empty()) {
-            return 1;
-        }
-        for (size_t i = 0; i < datasets.size(); ++i) {
-            std::cout << "  " << i + 1 << ": " << datasets[i] << std::endl;
-        }
+    // --- Get All Datasets ---
+    auto datasets = getAvailableDatasets(datasetsDir);
+    if (datasets.empty()) {
+        std::cerr << "Error: No datasets found in " << datasetsDir << std::endl;
+        return 1;
+    }
 
-        int datasetChoice;
-        std::cout << "Choose a dataset (number) or type 0 to exit: ";
-        std::cin >> datasetChoice;
-        if (std::cin.fail() || datasetChoice == 0) {
-            if (std::cin.fail()) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '
-');
-            }
-            break;
-        }
-        if (datasetChoice < 1 || datasetChoice > static_cast<int>(datasets.size())) {
-            std::cout << "Invalid choice. Please try again." << std::endl;
-            continue;
-        }
-        std::string selectedDataset = datasets[datasetChoice - 1];
-        std::string datasetPath = datasetsDir + "/" + selectedDataset;
-
-        // --- Algorithm Selection ---
-        std::vector<std::string> algorithms = {"BubbleSort", "MergeSort", "QuickSort", "HeapSort", "CountingSort"};
-        std::cout << "
-Available Algorithms:" << std::endl;
-        for (size_t i = 0; i < algorithms.size(); ++i) {
-            std::cout << "  " << i + 1 << ": " << algorithms[i] << std::endl;
-        }
+    // --- Run All Algorithms on All Datasets ---
+    std::vector<std::string> algorithms = {"BubbleSort", "MergeSort", "QuickSort", "HeapSort", "CountingSort"};
+    
+    for (const auto& dataset : datasets) {
+        std::string datasetPath = datasetsDir + "/" + dataset;
         
-        int algoChoice;
-        std::cout << "Choose an algorithm (number) or type 0 to go back: ";
-        std::cin >> algoChoice;
-        if (std::cin.fail() || algoChoice == 0) {
-             if (std::cin.fail()) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '
-');
-            }
-            continue;
-        }
-        if (algoChoice < 1 || algoChoice > static_cast<int>(algorithms.size())) {
-            std::cout << "Invalid choice. Please try again." << std::endl;
-            continue;
-        }
-        std::string selectedAlgo = algorithms[algoChoice - 1];
-
-        // --- Run Benchmark ---
-        runSortingAlgorithm(selectedAlgo, datasetPath);
-
-        // --- Continue or Exit ---
-        std::string another;
-        while (true) {
-            std::cout << "
-Run another benchmark? (yes/no): ";
-            std::cin >> another;
-            std::transform(another.begin(), another.end(), another.begin(), ::tolower);
-            if (another == "yes" || another == "no") {
-                break;
-            }
-            std::cout << "Invalid input. Please type 'yes' or 'no'." << std::endl;
-        }
-        if (another == "no") {
-            break;
+        std::cout << "\n" << std::string(60, '=') << std::endl;
+        std::cout << "DATASET: " << dataset << std::endl;
+        std::cout << std::string(60, '=') << std::endl;
+        
+        for (const auto& algorithm : algorithms) {
+            runSortingAlgorithm(algorithm, datasetPath);
         }
     }
 
+    std::cout << "\n" << std::string(60, '=') << std::endl;
+    std::cout << "ALL BENCHMARKS COMPLETED!" << std::endl;
+    std::cout << std::string(60, '=') << std::endl;
+
     return 0;
 }
-''
